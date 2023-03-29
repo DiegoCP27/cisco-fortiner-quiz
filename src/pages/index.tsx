@@ -3,9 +3,13 @@ import { useState } from "react";
 import { parseCookies } from 'nookies';
 import { destroyCookie } from 'nookies';
 
+interface QuestionOption {
+  answerByUser: null | string;
+}
+
 export default function Home({ questions }: any) {
-  const [currentQuestion, setCurrentQuestion] = useState(0);
-  const [selectedOptions, setSelectedOptions] = useState([]);
+  const [currentQuestion = 0, setCurrentQuestion] = useState<number>(0);
+  const [selectedOptions, setSelectedOptions] = useState<QuestionOption[]>([]);
   const [score, setScore] = useState(0);
   const [showScore, setShowScore] = useState(false);
   const [percentageScore, setPercentageScore] = useState(0);
@@ -40,13 +44,13 @@ export default function Home({ questions }: any) {
       }, 1000);
   };
   
-  const handleAnswerOption = (answer) => {
+  const handleAnswerOption = (answer: any) => {
     const updatedOptions = [...selectedOptions];
     updatedOptions[currentQuestion] = { answerByUser: answer };
     setSelectedOptions(updatedOptions);
   
     const updatedAnswerResults = [...answerResults];
-    const isCorrect = questions[currentQuestion].answerOptions.find(a => a.isCorrect).answer === answer;
+    const isCorrect = questions[currentQuestion].answerOptions.find((a: { isCorrect: any; }) => a.isCorrect).answer === answer;
     updatedAnswerResults[currentQuestion] = isCorrect;
     setAnswerResults(updatedAnswerResults);
     setSelectedAnswer(answer);
@@ -56,7 +60,7 @@ export default function Home({ questions }: any) {
     let newScore = 0;
     for (let i = 0; i < questions.length; i++) {
       questions[i].answerOptions.map(
-        (answer) =>
+        (answer: any) =>
           answer.isCorrect &&
           answer.answer === selectedOptions[i]?.answerByUser &&
           (newScore += 1)
@@ -103,7 +107,7 @@ export default function Home({ questions }: any) {
               )}
             </div>
             <div className="answer-options">
-            {questions[currentQuestion]?.answerOptions.map((answer, index) => (
+            {questions[currentQuestion]?.answerOptions.map((answer: any, index: any) => (
               <div
                 key={index}
                 className={`answer-option ${showAnswers ? (answer.isCorrect ? 'correct' : (selectedAnswer === answer.answer ? 'incorrect' : '')) : ''}`}
@@ -150,7 +154,7 @@ export default function Home({ questions }: any) {
   )
 }  
 
-export async function getServerSideProps(context) {
+export async function getServerSideProps(context: any) {
   const cookies = parseCookies(context);
   const token = cookies.token;
 
@@ -172,11 +176,11 @@ export async function getServerSideProps(context) {
       },
     });
     const response = await res.json();
-    const questions = response.data.map((question) => {
+    const questions = response.data.map((question: any) => {
       return {
         question: question.attributes.pregunta,
         imagen: question.attributes.imagen?.data?.attributes?.url || null,
-        answerOptions: question.attributes.respuestaOpcion.map((option) => {
+        answerOptions: question.attributes.respuestaOpcion.map((option: any) => {
           return {
             isCorrect: option.isCorrect,
             answer: option.respuesta,
