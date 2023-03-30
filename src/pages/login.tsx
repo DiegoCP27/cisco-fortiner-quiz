@@ -46,7 +46,7 @@ export default function LoginPage() {
   return (
     <div className="login-form">
       <form onSubmit={handleLogin}>
-        <Image className="logo" src={'/logo.jpg'} width={278} height={207} alt={'...'}></Image>
+        <Image className="logo" src={'/logo.jpg'} width={200} height={129} alt={'...'}></Image>
         <label>
           Correo electrónico:
           <input type="email" onChange={e => setEmail(e.target.value) } value={email}/>
