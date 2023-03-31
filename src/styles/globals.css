@@ -112,7 +112,7 @@ flex-basis: 9rem;
 
 @media screen and (max-width: 33.3125rem) {
 .button-wrapper button.logoutbtn {
-margin-top: 0.0625rem;
+margin-top: 1rem;
 }
 }
 
