@@ -188,11 +188,10 @@ export async function getServerSideProps(context: any) {
         }),
       };
     });
-    const shuffledQuestions = questions.sort(() => Math.random() - 0.5);
 
     return {
       props: {
-        questions: shuffledQuestions,
+        questions
       },
     };
   } catch {
