@@ -3,6 +3,8 @@ import Head from "next/head";
 import { useState } from "react";
 import { parseCookies } from 'nookies';
 import { destroyCookie } from 'nookies';
+import { ReactMarkdown } from "react-markdown/lib/react-markdown";
+import remarkGfm from 'remark-gfm';
 
 interface QuestionOption {
   answerByUser: null | string[];
@@ -175,7 +177,9 @@ export default function Home({ questions }: any) {
                       }
                       className="radio"
                     />
-                    <p className="answer-text">{answer.answer}</p>
+                    <ReactMarkdown className={"answer-text"} remarkPlugins={[remarkGfm]}>
+                      {answer.answer}
+                    </ReactMarkdown>
                   </label>
                 </div>
               );
