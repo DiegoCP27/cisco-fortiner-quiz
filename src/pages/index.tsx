@@ -228,7 +228,7 @@ export async function getServerSideProps(context: any) {
 
   try {
     // Si el token es válido, obtén las preguntas y devuélvelas al componente
-    const res = await fetch('https://strapi-production-5785.up.railway.app/api/preguntas?populate=*', {
+    const res = await fetch('https://strapi-production-5785.up.railway.app/api/preguntas?populate=*&sort[0]=id', {
       headers: {
         Authorization: `Bearer ${token}`,
       },
