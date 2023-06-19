@@ -10,7 +10,8 @@
 .buttonContainer {
   display: flex;
   justify-content: center;
-  gap: 6rem;
+  flex-wrap: wrap;
+  gap: clamp(1rem,4vw,4rem);
   width: 100%;
 }
 
