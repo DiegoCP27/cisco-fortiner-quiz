@@ -1,0 +1,161 @@
+/* Fuente */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+/* Colores */
+:root {
+--primary-color: #8c1aff;
+--secondary-color: #262626;
+}
+
+/* Estilos generales */
+
+*{
+box-sizing: border-box;
+margin: 0;
+padding: 0;
+font-family: 'Poppins', sans-serif;
+}
+
+.todo {
+display: flex;
+align-items: center;
+justify-content: center;
+height: 100vh;
+width: 100vw;
+}
+
+/* Contenedor principal */
+.container {
+width: 90%;
+max-width: 100rem;
+padding: 2.5rem;
+background-color: #fff;
+border-radius: 1rem;
+font-size: clamp(0.8rem, 1vw, 1rem);
+box-shadow: 0 0 1rem rgba(0, 0, 0, 0.3);
+}
+
+/* Títulos */
+h1, h4 {
+color: var(--secondary-color);
+font-weight: 600;
+}
+
+h1 {
+font-size: 2.5rem;
+text-align: center;
+}
+
+h4 {
+font-size: 1.2rem;
+}
+
+/* Preguntas y respuestas */
+.question {
+display: flex;
+flex-direction: column;
+gap: 1rem;
+margin-bottom: 2.5rem;
+}
+
+.question p {
+margin-bottom: 1.25rem;
+line-height: 1.5;
+}
+
+.answer-option {
+display: flex;
+align-items: center;
+margin-bottom: 0.9375rem;
+cursor: pointer;
+}
+
+.answer-option input[type="radio"] {
+margin-right: 0.625rem;
+cursor: pointer;
+}
+
+.answer-option p {
+line-height: 1.5;
+color: var(--secondary-color);
+}
+
+.answer-label {
+  display: flex;
+  gap: 1rem;
+  cursor: pointer;
+}
+
+.answer-text {
+  text-align: justify;
+  white-space: pre-wrap;
+  font-size: .8rem;
+}
+
+/* Botones */
+.button-wrapper {
+display: flex;
+justify-content: space-around;
+flex-wrap: wrap;
+margin-top: 1.875rem;
+}
+
+.button-wrapper button {
+padding: 0.625rem 1.25rem;
+border-radius: 0.3125rem;
+color: #fff;
+font-weight: 600;
+text-transform: uppercase;
+border: none;
+cursor: pointer;
+flex-basis: 8rem;
+flex-shrink: 0;
+background-color: black;
+}
+
+.button-wrapper button.logoutbtn {
+background-color: #f44336;
+flex-basis: 9rem;
+}
+
+.button-wrapper button.restart-button {
+flex-basis: 9rem;
+}
+
+@media screen and (max-width: 33.3125rem) {
+.button-wrapper button.logoutbtn {
+margin-top: 1rem;
+}
+}
+
+.button-wrapper button.previous {
+background-color: var(--secondary-color);
+}
+
+.button-wrapper button.next,
+.button-wrapper button.submit {
+background-color: var(--primary-color);
+}
+
+.button-wrapper button:disabled {
+opacity: 0.6;
+cursor: not-allowed;
+}
+
+.answer-option.correct {
+background-color: #4caf50;
+}
+
+.answer-option.incorrect {
+background-color: #f44336;
+}
+
+.imagenes {
+display: flex;
+align-items: center;
+justify-content: center;
+}
+
+.img_width {
+  width: clamp(18.75rem,37.5vw,37.5rem);
+}

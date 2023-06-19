@@ -1,0 +1,59 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  text-align: center;
+}
+
+.buttonContainer {
+  display: flex;
+  justify-content: center;
+  gap: 6rem;
+  width: 100%;
+}
+
+.buttonItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.logoContainer {
+  position: relative;
+  width: 320px;
+  height: 320px;
+  max-width: 320px;
+}
+
+.logoText {
+  position: absolute;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.button {
+  display: inline-block;
+  margin: 10px;
+  padding: 12px 20px;
+  background-color: #2e5177;
+  color: #fff;
+  font-size: 1.5rem;
+  text-decoration: none;
+  border-radius: 5px;
+  width: 11rem;
+}
+
+.button:hover {
+  background-color: #33659b;
+}
+
+.secondButton .button {
+  background-color: #eb2525;
+}
+
+
+.secondButton .button:hover {
+  background-color: #ee4141;
+}
