@@ -116,20 +116,17 @@ background-color: black;
 .button-wrapper button.logoutbtn {
 background-color: #f44336;
 flex-basis: 9rem;
+margin-top: 1rem;
 }
 
 .button-wrapper button.restart-button {
 flex-basis: 9rem;
 }
 
-@media screen and (max-width: 33.3125rem) {
-.button-wrapper button.logoutbtn {
-margin-top: 1rem;
-}
-}
-
 .button-wrapper button.previous {
 background-color: var(--secondary-color);
+margin-top: 1rem;
+flex-basis: 9rem;
 }
 
 .button-wrapper button.next,
@@ -159,3 +156,9 @@ justify-content: center;
 .img_width {
   width: clamp(18.75rem,37.5vw,37.5rem);
 }
+
+a {
+  text-decoration: none;
+  color: #000;
+}
+

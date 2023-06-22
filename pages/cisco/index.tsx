@@ -1,19 +1,16 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @next/next/no-img-element */
 import Head from "next/head";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { parseCookies } from "nookies";
-import { destroyCookie } from "nookies";
 import { ReactMarkdown } from "react-markdown/lib/react-markdown";
 import remarkGfm from "remark-gfm";
-import { useRouter } from "next/router";
 
 interface QuestionOption {
   answerByUser: null | string[];
 }
 
 export default function Home({ questions }: any) {
-  const router = useRouter();
   const [currentQuestion = 0, setCurrentQuestion] = useState<number>(0);
   const [selectedOptions, setSelectedOptions] = useState<QuestionOption[]>([]);
   const [score, setScore] = useState(0);
@@ -25,10 +22,32 @@ export default function Home({ questions }: any) {
   const [showAnswers, setShowAnswers] = useState(false);
   const [selectedAnswer, setSelectedAnswer] = useState(null);
 
-  const handleLogout = () => {
-    // Eliminar la cookie y redirigir al inicio de sesión
-    destroyCookie(null, 'token', { path: '/' });
-    router.push('/cisco/login');
+  const handleFinishQuiz = (): void => {
+    let newScore = 0;
+    for (let i = 0; i < questions.length; i++) {
+      const correctAnswers: string[] = questions[i].answerOptions
+        .filter((answer: { isCorrect: boolean }) => answer.isCorrect)
+        .map((answer: { answer: string }) => answer.answer)
+        .sort();
+  
+      const userAnswers: any = Array.isArray(selectedOptions[i]?.answerByUser)
+        ? selectedOptions[i]?.answerByUser
+        : selectedOptions[i]?.answerByUser !== null
+          ? [selectedOptions[i]?.answerByUser]
+          : null;
+  
+      const isCorrect: boolean =
+        userAnswers !== null &&
+        JSON.stringify(userAnswers.sort()) === JSON.stringify(correctAnswers.sort());
+  
+      if (isCorrect) {
+        newScore += 1;
+      }
+    }
+    setScore(newScore);
+    const percentage = ((newScore / questions.length) * 100).toFixed(2);
+    setPercentageScore(Number(percentage));
+    setShowScore(true);
   };
 
   const handlePrevious = () => {
@@ -87,30 +106,6 @@ export default function Home({ questions }: any) {
     updatedAnswerResults[currentQuestion] = isCorrect;
     setAnswerResults(updatedAnswerResults);
     setSelectedAnswer(updatedAnswerByUser);
-  };
-
-  const handleSubmitButton = () => {
-    let newScore = 0;
-    for (let i = 0; i < questions.length; i++) {
-      const correctAnswers = questions[i].answerOptions
-        .filter((answer: any) => answer.isCorrect)
-        .map((answer: any) => answer.answer)
-        .sort();
-      const userAnswers: any = Array.isArray(selectedOptions[i]?.answerByUser)
-        ? selectedOptions[i]?.answerByUser
-        : [selectedOptions[i]?.answerByUser];
-
-      const isCorrect =
-        JSON.stringify(userAnswers.sort()) ===
-        JSON.stringify(correctAnswers.sort());
-
-      if (isCorrect) {
-        newScore += 1;
-      }
-    }
-    setScore(newScore);
-    setPercentageScore((newScore / questions.length) * 100);
-    setShowScore(true);
   };
 
   return (
@@ -190,8 +185,9 @@ export default function Home({ questions }: any) {
                           className="radio"
                         />
                         <ReactMarkdown
-                          className={"answer-text"}
+                          className="answer-text"
                           remarkPlugins={[remarkGfm]}
+                          transformLinkUri={() => "#"}
                         >
                           {answer.answer}
                         </ReactMarkdown>
@@ -202,29 +198,22 @@ export default function Home({ questions }: any) {
               )}
             </div>
             <div className="button-wrapper">
-              <button onClick={handlePrevious} className="previous-button">
-                Anterior
-              </button>
-              <button
-                onClick={
-                  currentQuestion + 1 === questions.length
-                    ? handleSubmitButton
-                    : handleNext
-                }
-                className={
-                  currentQuestion + 1 === questions.length
-                    ? "submit-button"
-                    : "next-button"
-                }
-                disabled={!selectedOptions[currentQuestion]}
-              >
-                {currentQuestion + 1 === questions.length
-                  ? "Resultado"
-                  : "Siguiente"}
-              </button>
-              <button className="logoutbtn" onClick={handleLogout}>
-                Cerrar sesión
-              </button>
+              {currentQuestion > 0 && (
+                <button onClick={handlePrevious} className="previous">
+                  Anterior
+                </button>
+              )}
+              {currentQuestion < questions.length - 1 && (
+                <button onClick={handleNext} className="previous">
+                  Siguiente
+                </button>
+              )}
+                <button
+                  onClick={handleFinishQuiz}
+                  className="logoutbtn"
+                >
+                  Finalizar Quiz
+                </button>
             </div>
           </>
         )}
