@@ -1,0 +1,82 @@
+.menu {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+
+  .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #fff;
+    border-radius: 0.625rem;
+    box-shadow: 0 0 0.625rem rgba(0, 0, 0, 0.3);
+    padding: 40px;
+    width: clamp(20rem, 50%, 30rem);
+  }
+
+  label {
+    display: flex;
+    flex-direction: column;
+    font-weight: 600;
+    align-items: center;
+    text-align: center;
+    margin-top: 1.25rem;
+  }
+
+  .range {
+    display: flex;
+    align-items: center;
+
+    input[type="number"] {
+      display: flex;
+      align-items: center;
+      padding: 0.625rem;
+      border: 0.125rem solid #ccc;
+      border-radius: 0.313rem;
+      margin: 1.25rem 1.25rem 0 1.25rem;
+      width: clamp(3rem, 5vw, 5rem);
+    }
+
+    .separator {
+      margin-top: 1.25rem;
+    }
+  }
+
+  .initialTime {
+    padding-top: 1.25rem;
+    text-align: center;
+
+    .radio {
+      display: flex;
+      align-items: center;
+      font-size: .8rem;
+      gap: clamp(.6rem,1vw,1rem);
+    }
+  }
+
+  button {
+    background-color: black;
+    color: #fff;
+    padding: 0.625rem;
+    border-radius: 0.313rem;
+    border: none;
+    font-weight: 600;
+    text-transform: uppercase;
+    cursor: pointer;
+    margin-top: 1.25rem;
+    width: 50%;
+
+    &:hover {
+      background-color: #262626;
+    }
+  }
+
+  .errorMessage {
+    padding-bottom: 1rem;
+    font-size: clamp(0.9rem,1vw,1rem);;
+    color: #f00;
+  }
+}

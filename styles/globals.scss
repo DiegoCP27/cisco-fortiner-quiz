@@ -63,6 +63,12 @@ margin-bottom: 1.25rem;
 line-height: 1.5;
 }
 
+.question-timer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
 .answer-option {
 display: flex;
 align-items: center;
@@ -120,7 +126,7 @@ margin-top: 1rem;
 }
 
 .button-wrapper button.restart-button {
-flex-basis: 9rem;
+flex-basis: 10rem;
 }
 
 .button-wrapper button.previous {
