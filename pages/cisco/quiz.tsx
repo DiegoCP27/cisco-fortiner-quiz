@@ -56,10 +56,11 @@ export async function getServerSideProps(context: any) {
     const start = context.query.start;
     const end = context.query.end;
 
-    // Filtrar las preguntas según el rango seleccionado por el usuario
+    // Filtrar las preguntas según el rango seleccionado por el usuario y mezclarlas en un orden aleatorio
     if (start && end) {
       questions = questions.slice(start - 1, end);
     }
+    questions = questions.sort(() => Math.random() - 0.5);
 
     return {
       props: {
