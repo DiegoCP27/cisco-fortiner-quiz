@@ -60,7 +60,6 @@ export async function getServerSideProps(context: any) {
     if (start && end) {
       questions = questions.slice(start - 1, end);
     }
-    questions = questions.sort(() => Math.random() - 0.5);
     
     return {
       props: {
